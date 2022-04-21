@@ -1,46 +1,41 @@
-import {createStore} from "redux";
+import {configureStore, createAction, createReducer} from "@reduxjs/toolkit";
 
-const ADD = "ADD";
-const DELETE = "DELETE";
+const plusAction = createAction("PLUS");
+const minusAction = createAction("MINUS");
+const submitComment = createAction("SUBMIT");
 
-const addTodo = text => {
-  return {
-      type: ADD,
-      text
-  };
-};
 
-const deleteTodo = id => {
-  return {
-      type: DELETE,
-      id: parseInt(id),
-  }
-}
-
-// const dispatchAddTodo = text => {
-//     return  store.dispatch(addTodo(text));
-// }
-//
-// const dispatchDeleteTodo = id => {
-//   store.dispatch(deleteTodo(id));
+// const reducer = (currentState = {number: 0, comment:""}, action) => {
+//     switch (action.type) {
+//         case plusAction.type:
+//             return {...currentState, number: {...currentState}.number + 1};
+//         case minusAction.type:
+//             return {...currentState, number: {...currentState}.number - 1};
+//         case submitComment.type:
+//             return {...currentState, comment: action.payload}
+//         default:
+//             return currentState;
+//     }
 // }
 
-const reducer = (state = [], action) => {
-    switch (action.type) {
-        case ADD:
-            return [{ text: action.text, id: Date.now()}, ...state ];
-        case DELETE:
-            return state.filter(toDo => toDo.id !== action.id);
-        default:
-            return state;
+const reducer = createReducer({ number:0, comment:"" },{
+    [plusAction]: (state, action) => {
+        state.number++
+    },
+    [minusAction]: (state, action)=>{
+        state.number--
+    },
+    [submitComment]: (state, action) => {
+        state.comment = action.payload
     }
+})
+
+// const Store = configureStore({reducer});
+
+export default configureStore({reducer});
+
+export const actions = {
+    plus: plusAction(),
+    minus: minusAction(),
+    submit: commnet => submitComment(commnet),
 }
-
-const store = createStore(reducer);
-
-export const actionCreators = {
-    addTodo,
-    deleteTodo,
-}
-
-export default store;
