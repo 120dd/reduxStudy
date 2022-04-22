@@ -1,7 +1,8 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {plus, minus, fetchData} from "../redux/store";
-import {getData} from "../service/getData";
+import { plus, minus} from "../service/redux/user/slice";
+import {fetchData, getYoutubeData} from "../service/redux/yotubeData/slice";
+import {getData} from "../service/redux/yotubeData/getData";
 
 const Comp2 = (props) => {
 
@@ -10,9 +11,10 @@ const Comp2 = (props) => {
     const fetchedDataInfo = useSelector(state => state.youTubeData.fetchData);
 
     const onClick = async () => {
-        const data = await getData();
-        dispatch(fetchData(data));
-        console.log(data);
+        // const data = await getData();
+        // dispatch(fetchData(data));
+        // console.log(data);
+        await dispatch(getYoutubeData());
     }
 
     return(
