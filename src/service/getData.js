@@ -1,14 +1,11 @@
-// HTTP 통신 동작을 모방한 코드
-function fetchData(text) {
-    return new Promise(function(resolve, reject) {
-        setTimeout(function() {
-            const data = `받은 데이터는 ${text}입니다.`;
-            resolve(data)
-        }, 1000);
-    });
-}
 
-export const getData = async (text) => {
-    const data = await fetchData(text);
-    return await data
+export const getData = async () => {
+    const requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    const data = await fetch("https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=침착맨&type=video&key=AIzaSyBX10sxcM8ai2bPF7pkrJH8dGu0P3yH4kY", requestOptions)
+        .then(e=>e.json())
+    return data;
 }

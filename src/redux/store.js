@@ -1,48 +1,9 @@
-import {configureStore, createAction, createReducer, createSlice} from "@reduxjs/toolkit";
-
-// const plusAction = createAction("PLUS");
-// const minusAction = createAction("MINUS");
-// const submitComment = createAction("SUBMIT");
-
-
-// const reducer = (currentState = {number: 0, comment:""}, action) => {
-//     switch (action.type) {
-//         case plusAction.type:
-//             return {...currentState, number: {...currentState}.number + 1};
-//         case minusAction.type:
-//             return {...currentState, number: {...currentState}.number - 1};
-//         case submitComment.type:
-//             return {...currentState, comment: action.payload}
-//         default:
-//             return currentState;
-//     }
-// }
-
-// const reducer = createReducer({ number:0, comment:"" },{
-//     [plusAction]: (state, action) => {
-//         state.number++
-//     },
-//     [minusAction]: (state, action)=>{
-//         state.number--
-//     },
-//     [submitComment]: (state, action) => {
-//         state.comment = action.payload
-//     }
-// })
-//
-// // const Store = configureStore({reducer});
-//
-// export default configureStore({reducer});
-//
-// export const actions = {
-//     plus: plusAction(),
-//     minus: minusAction(),
-//     submit: commnet => submitComment(commnet),
-// }
+import {combineReducers, configureStore, createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     number: 0,
     commnet: "",
+    fetchData: {},
 }
 
 const userSlice = createSlice({
@@ -55,5 +16,21 @@ const userSlice = createSlice({
     }
 })
 
-export const { plus, minus, submitComment} = userSlice.actions;
-export default configureStore({reducer: userSlice.reducer});
+const youtubeSlice = createSlice({
+    name: 'youTubeData',
+    initialState,
+    reducers: {
+        fetchData: (state, action) => {state.fetchData = action.payload},
+    }
+})
+
+const reducer = combineReducers({
+    user: userSlice.reducer,
+    youTubeData: youtubeSlice.reducer,
+})
+
+const store = configureStore({reducer});
+
+export const { plus, minus, submitComment,} = userSlice.actions;
+export const { fetchData } = youtubeSlice.actions;
+export default store;
