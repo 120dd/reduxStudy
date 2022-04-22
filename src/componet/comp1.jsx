@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import { submitComment } from "../redux/store";
+import {submitComment} from "../service/redux/user/slice";
 
 const Comp1 = (props) => {
     const number = useSelector(state => state.user.number);

@@ -1,7 +1,8 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {plus, minus, fetchData} from "../redux/store";
-import {getData} from "../service/getData";
+import { plus, minus} from "../service/redux/user/slice";
+import {fetchData} from "../service/redux/yotubeData/slice";
+import {getData} from "../service/redux/yotubeData/getData";
 
 const Comp2 = (props) => {
 
