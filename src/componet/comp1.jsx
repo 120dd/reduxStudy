@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {actions} from "../store";
+import { submitComment } from "../redux/store";
+import {getData} from "../service/getData";
 
 const Comp1 = (props) => {
     const number = useSelector(state => state.number);
@@ -8,9 +9,11 @@ const Comp1 = (props) => {
     const inputValue = useRef();
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(inputValue.current.value);
+        // console.log(inputValue.current.value);
         const comment = inputValue.current.value;
-        dispatch(actions.submit(comment));
+        // dispatch(submitComment(comment));
+        getData(comment)
+            .then(data=>dispatch(submitComment(comment)))
         inputValue.current.value = "";
     }
 

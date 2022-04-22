@@ -40,7 +40,6 @@ import {configureStore, createAction, createReducer, createSlice} from "@reduxjs
 //     submit: commnet => submitComment(commnet),
 // }
 
-
 const initialState = {
     number: 0,
     commnet: "",
