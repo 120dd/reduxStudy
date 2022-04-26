@@ -13,17 +13,19 @@ import storage from "redux-persist/lib/storage/session";
 
 import {userSlice} from "./user/slice";
 import { youtubeSlice} from "./yotubeData/slice";
+import {authSlice} from "./authReducer/authReducer";
 
 const persistConfig = {
     key: "root",
     storage,
     version: 1,
-    whitelist: ["youTubeData"]
+    whitelist: ["youTubeData","authInfo"]
 }
 
 const rootReducer = combineReducers({
     user: userSlice.reducer,
     youTubeData: youtubeSlice.reducer,
+    authInfo: authSlice.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
