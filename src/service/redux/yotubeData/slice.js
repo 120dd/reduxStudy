@@ -4,8 +4,7 @@ import {getData} from "./getData";
 export const getYoutubeData = createAsyncThunk(
     'youtuData/getYoutubeDataStatus',
     async ()=>{
-        const response = await getData();
-        return response;
+        return  await getData();
     }
 )
 
